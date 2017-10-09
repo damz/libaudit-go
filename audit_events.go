@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"strconv"
 	"syscall"
+	"time"
 )
 
 // EventCallback is the function definition for any function that wants to receive an AuditEvent as soon as
@@ -23,7 +24,7 @@ type RawEventCallback func(string, error)
 // AuditEvent is a parsed audit message.
 type AuditEvent struct {
 	Serial    string            // Message serial
-	Timestamp string            // Timestamp
+	Timestamp time.Time         // Timestamp
 	Type      string            // Audit event type
 	Data      map[string]string // Map of field values in the audit message
 	Raw       string            // Raw audit message from kernel

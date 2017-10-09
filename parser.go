@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type record struct {
@@ -66,7 +67,10 @@ func ParseAuditEvent(str string, msgType auditConstant, interpret bool) (*AuditE
 	}
 
 	// determine timestamp
-	timestamp := str[:index]
+	timestamp, err := parseTime(str[:index])
+	if err != nil {
+		return nil, err
+	}
 	// move further on string, skipping ':'
 	str = str[index+1:]
 	index = strings.Index(str, ")")
@@ -270,6 +274,26 @@ func getSpaceSlice(str *string, b *string, v *int) {
 		// Keep updating total characters processed
 		*v += len(*b)
 	}
+}
+
+func parseTime(value string) (t time.Time, err error) {
+	parts := strings.SplitN(value, ".", 2)
+	if len(parts[1]) < 9 {
+		parts[1] = parts[1] + strings.Repeat("0", 9-len(parts[1]))
+	}
+
+	sec, err := strconv.ParseInt(parts[0], 10, 64)
+	if err != nil {
+		return
+	}
+
+	nSec, err := strconv.ParseInt(parts[1], 10, 64)
+	if err != nil {
+		return
+	}
+
+	t = time.Unix(sec, nSec)
+	return
 }
 
 func fixPunctuations(value *string) {

@@ -7,6 +7,7 @@ package libaudit
 import (
 	"reflect"
 	"testing"
+	"time"
 )
 
 var auditTests = []struct {
@@ -23,7 +24,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "96",
-			Timestamp: "1226874073.147",
+			Timestamp: time.Unix(1226874073, 147000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"path": `"/var/www/html/file1 space"`, "dev": "dm-0", "ino": "284133", "scontext": "unconfined_u:system_r:httpd_t:s0", "tcontext": "unconfined_u:object_r:samba_share_t:s0", "pid": "2465", "seperms": "getattr", "comm": `"httpd"`, "tclass": "file", "seresult": "denied"},
@@ -36,7 +37,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "1445",
-			Timestamp: "1464176620.068",
+			Timestamp: time.Unix(1464176620, 68000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"comm": `"chrome"`, "exe": `"/opt/google/chrome/chrome"`, "arch": "c000003e", "compat": "0", "code": "0x50000", "ses": "4294967295", "uid": "1000", "gid": "1000", "pid": "23975", "sig": "0", "syscall": "273", "ip": "0x7f1da6d8b694", "auid": "4294967295"},
@@ -48,7 +49,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "20",
-			Timestamp: "1464163771.720",
+			Timestamp: time.Unix(1464163771, 720000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"success": "yes", "a2": "a0cdb", "uid": "0", "sgid": "0", "fsgid": "0", "ses": "4294967295", "exit": "658651", "a0": "6", "ppid": "712", "suid": "0", "key": "(null)", "tty": "(none)", "comm": `"apparmor_parser"`, "arch": "c000003e", "syscall": "1", "a1": "7f26862ea010", "items": "0", "pid": "716", "fsuid": "0", "exe": `"/sbin/apparmor_parser"`, "a3": "0", "auid": "4294967295", "gid": "0", "euid": "0", "egid": "0"},
@@ -60,7 +61,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "993",
-			Timestamp: "1464093935.845",
+			Timestamp: time.Unix(1464093935, 845000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"op": "PAM:setcred", "acct": `"root"`, "hostname": "?", "addr": "?", "res": "success", "uid": "0", "auid": "4294967295", "exe": `"/usr/bin/sudo"`, "terminal": "/dev/pts/18", "pid": "4148", "ses": "4294967295"},
@@ -73,7 +74,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "19",
-			Timestamp: "1267534395.930",
+			Timestamp: time.Unix(1267534395, 930000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"": " user", "uid": "0", "subj": "system_u:unconfined_r:unconfined_t", "scontext": "unconfined_u:unconfined_r:x_select_paste_t", "ses": "4294967295", "comm": "X-setest", "sauid": "0", "addr": "?", "pid": "1169", "auid": "4294967295", "request": "SELinux:SELinuxGetClientContext", "resid": "3c00001", "restype": "<unknown>", "hostname": "?", "terminal": "?", "seresult": "denied", "seperms": "read", "tcontext": "unconfined_u:unconfined_r:unconfined_t", "tclass": "x_resource :", "exe": `"/usr/bin/Xorg "`},
@@ -86,7 +87,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "1421",
-			Timestamp: "1464617439.911",
+			Timestamp: time.Unix(1464617439, 911000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"pid": "30576", "auid": "4294967295", "exe": `"/usr/bin/sudo"`, "addr": "?", "terminal": "/dev/pts/18", "uid": "0", "ses": "4294967295", "op": "PAM:setcred", "acct": `"root"`, "hostname": "?", "res": "success"},
@@ -99,7 +100,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "1422",
-			Timestamp: "1464617439.911",
+			Timestamp: time.Unix(1464617439, 911000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"uid": "0", "auid": "4294967295", "ses": "4294967295", "op": "PAM:session_open", "exe": `"/usr/bin/sudo"`, "addr": "?", "terminal": "/dev/pts/18", "pid": "30576", "res": "success", "hostname": "?", "acct": `"root"`},
@@ -112,7 +113,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "1425",
-			Timestamp: "1464617444.219",
+			Timestamp: time.Unix(1464617444, 219000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"auid": "4294967295", "ses": "4294967295", "cwd": `"/home/arun/Work/go-ground/src/github.com/arunk-s/parser"`, "cmd": "636174202F7661722F6C6F672F61756469742F61756469742E6C6F67", "terminal": "pts/18", "res": "success", "pid": "30579", "uid": "1000"},
@@ -125,7 +126,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "1431",
-			Timestamp: "1464617461.107",
+			Timestamp: time.Unix(1464617461, 107000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"exe": `"/usr/bin/sudo"`, "hostname": "?", "addr": "?", "terminal": "/dev/pts/18", "res": "success", "pid": "30586", "uid": "0", "auid": "4294967295", "ses": "4294967295", "op": "PAM:setcred", "acct": `"root"`},
@@ -138,7 +139,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "1290",
-			Timestamp: "1464614823.239",
+			Timestamp: time.Unix(1464614823, 239000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"hostname": "?", "addr": "?", "res": "success", "auid": "4294967295", "ses": "4294967295", "unit": "NetworkManager-dispatcher", "comm": `"systemd"`, "exe": `"/lib/systemd/systemd"`, "pid": "1", "uid": "0", "terminal": "?"},
@@ -151,7 +152,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "1292",
-			Timestamp: "1464614843.495",
+			Timestamp: time.Unix(1464614843, 495000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"pid": "1", "auid": "4294967295", "ses": "4294967295", "unit": "systemd-rfkill", "comm": `"systemd"`, "exe": `"/lib/systemd/systemd"`, "hostname": "?", "res": "success", "uid": "0", "addr": "?", "terminal": "?"},
@@ -164,7 +165,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "302",
-			Timestamp: "1464590772.564",
+			Timestamp: time.Unix(1464590772, 564000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"pid": "5803", "comm": `"chrome"`, "syscall": "273", "ip": "0x7f3deee65694", "gid": "1000", "uid": "1000", "ses": "4294967295", "exe": `"/opt/google/chrome/chrome"`, "sig": "0", "arch": "c000003e", "compat": "0", "code": "0x50000", "auid": "4294967295"},
@@ -177,7 +178,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "388",
-			Timestamp: "1464505771.166",
+			Timestamp: time.Unix(1464505771, 166000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"pid": "1", "hostname": "?", "res": "success", "terminal": "?", "uid": "0", "auid": "4294967295", "ses": "4294967295'unit=NetworkManager-dispatcher", "comm": `"systemd"`, "exe": `"/lib/systemd/systemd"`, "addr": "?"},
@@ -190,7 +191,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "389",
-			Timestamp: "1464505794.710",
+			Timestamp: time.Unix(1464505794, 710000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"auid": "4294967295", "comm": `"Chrome_libJingl"`, "sig": "0", "arch": "c000003e", "ip": "0x7fb359e4d694", "code": "0x50000", "uid": "1000", "gid": "1000", "ses": "4294967295", "pid": "4075", "exe": `"/opt/google/chrome/chrome"`, "syscall": "273", "compat": "0"},
@@ -203,7 +204,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "401",
-			Timestamp: "1464505808.342",
+			Timestamp: time.Unix(1464505808, 342000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"pid": "4076", "comm": `"Chrome_libJingl"`, "exe": `"/opt/google/chrome/chrome"`, "sig": "0", "syscall": "273", "compat": "0", "code": "0x50000", "ses": "4294967295", "uid": "1000", "gid": "1000", "arch": "c000003e", "ip": "0x7fb359e4d694", "auid": "4294967295"},
@@ -216,7 +217,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "403",
-			Timestamp: "1464505810.566",
+			Timestamp: time.Unix(1464505810, 566000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"auid": "4294967295", "exe": `"/opt/google/chrome/chrome"`, "sig": "0", "arch": "c000003e", "syscall": "273", "compat": "0", "code": "0x50000", "uid": "1000", "gid": "1000", "ses": "4294967295", "pid": "4078", "comm": `"chrome"`, "ip": "0x7fb359e4d694"},
@@ -229,7 +230,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "474",
-			Timestamp: "1464505927.046",
+			Timestamp: time.Unix(1464505927, 46000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"uid": "0", "exe": `"/lib/systemd/systemd"`, "hostname": "?", "addr": "?", "terminal": "?", "res": "success", "pid": "1", "auid": "4294967295", "ses": "4294967295", "unit": "lm-sensors", "comm": `"systemd"`},
@@ -242,7 +243,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "508",
-			Timestamp: "1464505927.314",
+			Timestamp: time.Unix(1464505927, 314000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"pid": "1", "hostname": "?", "addr": "?", "unit": "rc-local", "comm": `"systemd"`, "exe": `"/lib/systemd/systemd"`, "terminal": "?", "res": "success", "uid": "0", "auid": "4294967295", "ses": "4294967295"},
@@ -255,7 +256,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "3509",
-			Timestamp: "1464550921.784",
+			Timestamp: time.Unix(1464550921, 784000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"syscall": "273", "compat": "0", "ip": "0x7f26b8828694", "code": "0x50000", "auid": "4294967295", "uid": "1000", "gid": "1000", "sig": "0", "arch": "c000003e", "ses": "4294967295", "pid": "14869", "comm": `"chrome"`, "exe": `"/opt/google/chrome/chrome"`},
@@ -268,7 +269,7 @@ var auditTests = []struct {
 		true,
 		AuditEvent{
 			Serial:    "293",
-			Timestamp: "1170021493.977",
+			Timestamp: time.Unix(1170021493, 977000000),
 			Type:      "AVC",
 			Data: map[string]string{
 				"scontext": "system_u:system_r:postfix_pickup_t:s0", "seresult": "denied", "comm": `"pickup"`, "name": `"maildrop"`, "dev": "hda7", "ino": "14911367", "tcontext": "system_u:object_r:postfix_spool_maildrop_t:s0", "tclass": "dir", "seperms": "read,write", "pid": "13010"},
