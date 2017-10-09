@@ -311,16 +311,8 @@ done:
 			return ret, err
 		}
 		for _, m := range msgs {
-			socketPID, err := s.GetPID()
-			if err != nil {
-				return ret, err
-			}
 			if m.Header.Seq != seq {
 				// Wasn't the sequence number we are looking for, just discard it
-				continue
-			}
-			if int(m.Header.Pid) != socketPID {
-				// PID didn't match, just discard it
 				continue
 			}
 			if m.Header.Type == syscall.NLMSG_DONE {
