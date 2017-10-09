@@ -21,7 +21,7 @@ func bufferEvent(a *AuditEvent) {
 		return
 	}
 	if _, ok := bufferMap[serial]; !ok {
-		bufferMap[serial] = make([]*AuditEvent, 5)
+		bufferMap[serial] = make([]*AuditEvent, 0, 5)
 	}
 	bufferMap[serial] = append(bufferMap[serial], a)
 }
