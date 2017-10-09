@@ -16,7 +16,7 @@ import (
 	"github.com/mozilla/libaudit-go"
 )
 
-func auditProc(e *libaudit.AuditEvent, err error) {
+func auditProc(e []*libaudit.AuditEvent, err error) {
 	if err != nil {
 		// See if the error is libaudit.ErrorAuditParse, if so convert and also display
 		// the audit record we could not parse

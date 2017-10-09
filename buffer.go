@@ -27,32 +27,15 @@ func bufferEvent(a *AuditEvent) {
 }
 
 // bufferGet returns the complete audit event from the buffer, given the AUDIT_EOE event a.
-func bufferGet(a *AuditEvent) *AuditEvent {
+func bufferGet(a *AuditEvent) []*AuditEvent {
 	serial, err := strconv.ParseUint(a.Serial, 10, 64)
 	if err != nil {
 		return nil
 	}
 
-	var (
-		bm []*AuditEvent
-		ok bool
-	)
-	if bm, ok = bufferMap[serial]; !ok {
-		return nil
+	data, ok := bufferMap[serial]
+	if ok {
+		delete(bufferMap, serial)
 	}
-	rlen := len(a.Raw)
-	for i := range bm {
-		if bm[i] == nil {
-			continue
-		}
-		for k, v := range bm[i].Data {
-			a.Data[k] = v
-		}
-		if len(bm[i].Raw) > rlen {
-			a.Raw += " " + bm[i].Raw[rlen:]
-		}
-	}
-
-	delete(bufferMap, serial)
-	return a
+	return data
 }

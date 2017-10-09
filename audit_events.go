@@ -14,7 +14,7 @@ import (
 // EventCallback is the function definition for any function that wants to receive an AuditEvent as soon as
 // it is received from the kernel. Error will be set to indicate any error that occurs while receiving
 // messages.
-type EventCallback func(*AuditEvent, error)
+type EventCallback func([]*AuditEvent, error)
 
 // RawEventCallback is similar to EventCallback but the difference is that the function will receive only
 // the message string which contains the audit event and not the parsed AuditEvent struct.
@@ -39,7 +39,7 @@ type AuditEvent struct {
 //
 // See https://www.redhat.com/archives/linux-audit/2016-January/msg00019.html for additional information
 // on the behavior of this function.
-func NewAuditEvent(msg NetlinkMessage) (*AuditEvent, error) {
+func NewAuditEvent(msg NetlinkMessage) ([]*AuditEvent, error) {
 	x, err := ParseAuditEvent(string(msg.Data[:]), auditConstant(msg.Header.Type), true)
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func NewAuditEvent(msg NetlinkMessage) (*AuditEvent, error) {
 	// event immediately.
 	if auditConstant(msg.Header.Type) < AUDIT_SYSCALL ||
 		auditConstant(msg.Header.Type) >= AUDIT_FIRST_ANOM_MSG {
-		return x, nil
+		return []*AuditEvent{x}, nil
 	}
 
 	// If this is an EOE message, get the entire processed message and return it.
